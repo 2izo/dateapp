@@ -5,13 +5,26 @@ import { ListsComponent } from './lists/lists.component';
 import { MemberDetailsComponent } from './members/member-details/member-details.component';
 import { MemberListsComponent } from './members/member-lists/member-lists.component';
 import { MessagesComponent } from './messages/messages.component';
+import { AuthGuard } from './_auth/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'members/:id', component: MemberDetailsComponent },
-  { path: 'members', component: MemberListsComponent },
-  { path: 'lists', component: ListsComponent },
-  { path: 'messages', component: MessagesComponent },
+
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'members', component: MemberListsComponent },
+      { path: 'lists', component: ListsComponent },
+      { path: 'messages', component: MessagesComponent },
+      {
+        path: 'members/:id',
+        component: MemberDetailsComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
+  },
   { path: '**', component: HomeComponent, pathMatch: 'full' },
 ];
 
