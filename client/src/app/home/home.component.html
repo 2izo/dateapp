@@ -1,0 +1,17 @@
+<div *ngIf="!switching" class="container mt-5">
+  <div style="text-align: center">
+    <h1>Find your soulmate</h1>
+    <p class="lead">All you need is to sign up</p>
+    <button (click)="switch()" class="btn-primary btn btn-lg mr-2">
+      Register
+    </button>
+    <button type="button" class="btn btn-default btn-lg mr-2">
+      Learn more
+    </button>
+  </div>
+</div>
+<div *ngIf="switching" class="container">
+  <div class="row justify-content-center">
+    <app-register (canceling)="cancelRegister($event)"></app-register>
+  </div>
+</div>
