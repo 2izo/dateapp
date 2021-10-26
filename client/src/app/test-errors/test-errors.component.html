@@ -1,0 +1,22 @@
+<ng-container>
+  <button class="btn btn-outline btn-primary mr-3" (click)="getValidation()">
+    Test 400 validation error
+  </button>
+  <button class="btn btn-outline btn-primary mr-3" (click)="getBadRequest()">
+    test 400 bad request
+  </button>
+  <button class="btn btn-outline btn-primary mr-3" (click)="getAuth()">
+    Test 401 authorized error
+  </button>
+  <button class="btn btn-outline btn-primary mr-3" (click)="getNotFound()">
+    Test 404 not found error
+  </button>
+  <button class="btn btn-outline btn-primary mr-3" (click)="getNullref()">
+    Tess 500 error
+  </button>
+  <div class="row mt-5" *ngIf="validationErrors.length > 0">
+    <ul class="text-danger">
+      <li *ngFor="let err of validationErrors">{{ err }}</li>
+    </ul>
+  </div>
+</ng-container>

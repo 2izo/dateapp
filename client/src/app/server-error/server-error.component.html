@@ -1,0 +1,18 @@
+<h4>Internal server error</h4>
+
+<ng-container *ngIf="error">
+  <h5 class="text-danger">Error {{ error.message }}</h5>
+  <p class="font-weight-bold">
+    Its not angular fault, and not your fault dont blame yourself you are soo
+    great :)
+  </p>
+  <p>What to do next</p>
+  <ol>
+    <li>Open chrome dev tools</li>
+    <li>Inspect network tab</li>
+    <li>check failing request</li>
+    <li>examine the request url</li>
+    <li>reproduce error in postman</li>
+  </ol>
+  <code class="mt-5" style="background-color: azure">{{ error.details }}</code>
+</ng-container>

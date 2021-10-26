@@ -5,6 +5,9 @@ import { ListsComponent } from './lists/lists.component';
 import { MemberDetailsComponent } from './members/member-details/member-details.component';
 import { MemberListsComponent } from './members/member-lists/member-lists.component';
 import { MessagesComponent } from './messages/messages.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ServerErrorComponent } from './server-error/server-error.component';
+import { TestErrorsComponent } from './test-errors/test-errors.component';
 import { AuthGuard } from './_auth/auth.guard';
 
 const routes: Routes = [
@@ -15,6 +18,7 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
+      { path: 'home', component: HomeComponent },
       { path: 'members', component: MemberListsComponent },
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },
@@ -25,6 +29,9 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'server-error', component: ServerErrorComponent },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: 'error', component: TestErrorsComponent },
   { path: '**', component: HomeComponent, pathMatch: 'full' },
 ];
 
