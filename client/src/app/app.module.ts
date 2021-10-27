@@ -23,6 +23,9 @@ import { TestErrorsComponent } from './test-errors/test-errors.component';
 import { ErrorInterceptorInterceptor } from './_intercepters/error-interceptor.interceptor';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
+import { MembercardComponent } from './members/membercard/membercard.component';
+import { JwtInterceptor } from './_intercepters/jwt.interceptor';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +39,7 @@ import { ServerErrorComponent } from './server-error/server-error.component';
     TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
+    MembercardComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,11 +53,17 @@ import { ServerErrorComponent } from './server-error/server-error.component';
       toastClass: 'toast-error',
       messageClass: 'toast-bottom-right',
     }),
+    TabsModule.forRoot(),
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptorInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
       multi: true,
     },
   ],

@@ -13,7 +13,7 @@ namespace API.Data
     {
         public static async Task Seeding(DataContext db)
         {
-            if(db.Users.Any()){  return;}
+            if(db.Users.Any()){ Console.WriteLine("ASdk"); return;}
            
             var userData = await System.IO.File.ReadAllTextAsync("Data/UserSamples.json");
  
@@ -23,8 +23,7 @@ namespace API.Data
                 user.UserName = user.UserName.ToLower();
                 user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("password"));
                 user.PasswordSalt = hmac.Key;
-                db.Users.Add(user);
-                
+                db.Users.Add(user);   
             }
             await db.SaveChangesAsync();
         }

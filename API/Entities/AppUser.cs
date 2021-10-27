@@ -15,7 +15,7 @@ namespace API.Entities
         public string Country { get; set; } 
         public string Gender { get; set; }
         public string LookingFor { get; set; }
-        public string Intrests { get; set; }
+        public string Interests { get; set; }
         public string Introduction { get; set; }
         public DateTime DateOfbirth { get; set; }
         

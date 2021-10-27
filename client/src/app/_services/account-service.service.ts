@@ -3,17 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs';
 import { User } from '../_models/User';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class AccountServiceService {
-  url = 'https://localhost:5001';
   currentUser = new ReplaySubject<User>(1);
   currentUser$ = this.currentUser.asObservable();
   constructor(private http: HttpClient) {}
   login(model: User) {
     return this.http
-      .post<User>('https://localhost:5001/api/account/login', model)
+      .post<User>(environment.basicUrl + '/account/login', model)
       .pipe(
         map((res: User) => {
           if (res) {
@@ -25,7 +25,7 @@ export class AccountServiceService {
   }
   register(model: User) {
     return this.http
-      .post('https://localhost:5001/api/account/register', model)
+      .post(environment.basicUrl + '/account/register', model)
       .pipe(
         map((user: any) => {
           if (user) {
