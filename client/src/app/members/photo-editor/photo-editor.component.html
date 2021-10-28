@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-2" *ngFor="let item of member.photos">
+    <img src="{{ item.url }}" alt="{{ item.url }}" class="img-thumbnail p-1" />
+    <div class="text-center">
+      <button class="btn-sm btn">Main</button>
+      <button class="btn btn-danger btn-sm">
+        <i class="fa fa-tr"></i>
+      </button>
+    </div>
+  </div>
+</div>

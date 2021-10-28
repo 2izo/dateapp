@@ -23,7 +23,6 @@ export class NavbarComponent implements OnInit {
   submit() {
     this.accountservice.login(this.model).subscribe(
       (response) => {
-        console.log(response);
         this.loggedIn = true;
       },
       (err) => {

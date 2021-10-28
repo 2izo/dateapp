@@ -33,7 +33,7 @@ namespace API.Data
 
         public async Task<bool> SaveAllAsync()
         {
-            return await _db.SaveChangesAsync()>1;
+            return await _db.SaveChangesAsync()>0;
         }
 
         public void Update(AppUser user)

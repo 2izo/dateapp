@@ -26,6 +26,8 @@ import { ServerErrorComponent } from './server-error/server-error.component';
 import { MembercardComponent } from './members/membercard/membercard.component';
 import { JwtInterceptor } from './_intercepters/jwt.interceptor';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +42,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     NotFoundComponent,
     ServerErrorComponent,
     MembercardComponent,
+    MemberEditComponent,
+    PhotoEditorComponent,
   ],
   imports: [
     BrowserModule,

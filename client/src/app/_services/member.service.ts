@@ -22,4 +22,7 @@ export class MemberService {
   getUser(username: string) {
     return this.http.get<Member>(environment.basicUrl + '/users/' + username);
   }
+  updateUser(member: Member) {
+    return this.http.put(environment.basicUrl + '/users/', member);
+  }
 }
