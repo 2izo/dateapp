@@ -22,7 +22,18 @@ export class MemberService {
   getUser(username: string) {
     return this.http.get<Member>(environment.basicUrl + '/users/' + username);
   }
+  deletePhoto(photoId: number) {
+    return this.http.delete(
+      environment.basicUrl + '/users/delete-photo/' + photoId
+    );
+  }
   updateUser(member: Member) {
     return this.http.put(environment.basicUrl + '/users/', member);
+  }
+  setMainPhoto(photoId: number) {
+    return this.http.put(
+      environment.basicUrl + '/users/set-main-photo/' + photoId,
+      {}
+    );
   }
 }

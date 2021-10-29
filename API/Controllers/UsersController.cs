@@ -41,6 +41,8 @@ namespace API.Controllers
         public async Task<MemeberDto> GetUsers(string username)
         {
             return _map.Map<MemeberDto>(await _db.GetUserByUserNameAsync(username));
+            
+            
         }
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
@@ -74,7 +76,36 @@ namespace API.Controllers
            return BadRequest("Cant Upload Photo");
 
         }
+        [HttpPut("set-main-photo/{photoId}")]
 
+        public async Task<ActionResult> SetMainPhoto(int photoId)
+        {
+            var user = await _db.GetUserByUserNameAsync(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var currentPhoto = user.Photos.FirstOrDefault(x=>x.IsMain);
+            if(currentPhoto.Id==photoId)return BadRequest("This photo is already your currentPhoto");
+            var mainPhoto = user.Photos.FirstOrDefault(x=>x.Id==photoId);
+            if(mainPhoto==null){
+                return BadRequest("Photo doesnt exist");
+            }
+            currentPhoto.IsMain = false;
+            mainPhoto.IsMain=true;
+            if(await _db.SaveAllAsync()) return NoContent();
+            return BadRequest("Couldnt upload photo");
+        }
+        [HttpDelete("delete-photo/{photoID}")]
+        public async Task<ActionResult> DeletePhoto(int photoID)
+        {
+            var user = await _db.GetUserByUserNameAsync(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var currentPhoto = user.Photos.FirstOrDefault(photo=>photo.Id==photoID);
+            if(currentPhoto.IsMain) return BadRequest("Cant Delete Your Main Photo");
+            var error = await _photoService.DeleteImageAsync(currentPhoto.PublicId);
+            if(error.Error!=null) {
+                Console.WriteLine(error.Error);
+                return BadRequest("Couldnto delete this photo");}
+            user.Photos.Remove(currentPhoto);
+            if(await _db.SaveAllAsync()) return Ok();
+            return BadRequest("Couldnt delete this photo");
+        }
 
     }
 }

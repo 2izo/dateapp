@@ -18,8 +18,6 @@ namespace API.Entities
         public string Interests { get; set; }
         public string Introduction { get; set; }
         public DateTime DateOfbirth { get; set; }
-        
-        
         public DateTime Created { get; set; } = DateTime.Now;
         public DateTime LastActive { get; set; } = DateTime.Now;
         public ICollection<Photo> Photos{get;set;}

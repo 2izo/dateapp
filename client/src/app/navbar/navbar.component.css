@@ -1,3 +1,9 @@
 .dropdown-toggle.text-light {
   cursor: pointer;
 }
+img {
+  max-height: 30px;
+  border-radius: 50%;
+  border: 1px #fff solid;
+  margin-right: 5px;
+}

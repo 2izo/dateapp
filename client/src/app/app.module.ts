@@ -28,6 +28,8 @@ import { JwtInterceptor } from './_intercepters/jwt.interceptor';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { FileUploadModule } from 'ng2-file-upload';
+// import { FileUploadModule } from 'ng2-file-upload';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +60,7 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
       messageClass: 'toast-bottom-right',
     }),
     TabsModule.forRoot(),
+    FileUploadModule,
   ],
   providers: [
     {

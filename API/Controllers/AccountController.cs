@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using API.services;
 using API.interfaces;
+using System.Linq;
 
 namespace API.Controllers
 {
@@ -44,7 +45,8 @@ namespace API.Controllers
         [Route("login")]
         public async Task<ActionResult<UserDto>> Login(AccountDto accountDto)
         {
-            var user = await _db.Users.SingleOrDefaultAsync(User => User.UserName == accountDto.Username);
+            var user = await _db.Users.Include(P=>P.Photos).
+            SingleOrDefaultAsync(User => User.UserName == accountDto.Username);
             if (user == null) return Unauthorized("User not found");
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
@@ -57,7 +59,8 @@ namespace API.Controllers
                 }
             }
             var token =_tokenservice.GenerateToken(user);
-            return new UserDto{Username=user.UserName, Token=token};
+            var photoUrl = user.Photos.FirstOrDefault(p=>p.IsMain)?.Url;
+            return new UserDto{Username=user.UserName, Token=token, PhotoUrl = photoUrl};
         }
     }
 }
